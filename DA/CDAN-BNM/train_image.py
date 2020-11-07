@@ -311,6 +311,17 @@ if __name__ == "__main__":
     else:
         raise ValueError('Dataset cannot be recognized. Please define your own dataset here.')
 
+    seed = random.randint(1,10000)
+    print(seed)
+    torch.manual_seed(seed)
+    torch.cuda.manual_seed(seed)
+    torch.cuda.manual_seed_all(seed)
+    np.random.seed(seed)
+    random.seed(seed)
+
+    #uncommenting the following two lines for reproducing
+    #torch.backends.cudnn.deterministic = True
+    #torch.backends.cudnn.benchmark = False
     config["out_file"].write(str(config))
     config["out_file"].flush()
     train(config)
